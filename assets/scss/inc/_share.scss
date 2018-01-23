@@ -1,0 +1,88 @@
+.sshare {
+    margin: 0 0 ($gutter / 2 ) 0;
+    padding:14px 0 6px;
+    display: block; 
+    position: relative;
+
+    div:first-child {display: inline-block;}
+    a { 
+        font-size: 16px;
+        font-family: $arial;
+        padding: 8px 12px;
+        margin:4px 4px 4px 0;
+        display: inline-block;
+        color: $white;
+        text-decoration: none;
+        width: auto; 
+        height:auto;
+        border-radius:3px;
+        overflow: initial;
+        &:visited, &:active, &:focus{color:$white;}
+    }
+    i {
+        font-size:18px;
+        position: relative;
+        left: -2px;
+        top: 1px;
+    } 
+    
+   
+
+    // plus Btn
+    .more { 
+        background-color:$d6gray; 
+        padding: 8px 10px;
+        // width :36px; height:36px;
+        i { left:0; }      
+    }
+    
+    .comments-count {
+        font-size: 16px;
+        color: $devilgray;
+        text-decoration: underline;
+        text-transform: uppercase;
+        padding: 8px 0 8px 4px;
+        &:visited, &:active, &:focus{color:$devilgray;}
+    }
+
+    .moreShare { display :none; }
+
+    &.active{
+        .more{ display:none; }
+        div:first-child { display:inline-block;}
+        .moreShare { display:inline-block;} 
+
+    }
+
+    &.big {
+        div:first-child { width : 80%;}
+        a:not(.more) {
+            text-transform : uppercase;
+            width : 96%;
+        }
+        &.active {
+            div:first-child, a { width : 100%;}
+        }
+    } 
+}
+
+
+.fb {background-color:$facebook;}
+.tw {background-color:$twitter;}
+.gp {background-color: $googleplus;}
+.pin {background-color: $pinterest; }
+.env {background-color: $envelope; }
+
+
+@media (min-width:680px) {
+    .sshare  {
+         div:first-child, a {display:inline-block; width:auto;} 
+         &.active {
+            .moreShare, div:first-child { display:inline-block;}
+         } 
+         &.active.big {
+            .moreShare { width : 100%;}
+            a:not(.more) {width : 49%; }
+         } 
+    }
+}

@@ -1,0 +1,67 @@
+@media (min-width:680px) {}
+
+@media (min-width:768px) {
+    header {
+        h1 {
+            // font-size: 32px;
+        }
+    }
+
+    main {
+        article,
+        .gut,
+        .bottom {
+            @include clearfix(false);
+        }
+    }
+
+    section.contentWell {
+        float: left;
+        width:100%;
+        margin-right: ( -#{$asideWidth} );
+        padding-right: $asideWidth + ($gutter * 2);
+
+        .landing & {
+            width: 50%;
+            margin-right:auto;
+            padding-right:0;
+        }
+    }
+
+    aside.rel {
+        float: right;
+
+        width: $asideWidth;
+        .landing &{
+            width: 50%;
+        }
+
+    }
+}
+
+
+/* Initiate two column layout gooooooooo! ----- */
+
+@media (min-width:980px) {
+
+    .gut {
+        // position: relative;
+        // width: 100%;
+        // padding: 0 400px 0 0;
+        // @include transitionIt(height, 0.5s);
+        // min-height: 60vh;
+    }
+
+    article {
+
+    }
+    /* Bottom tout module for more stories ---------- */
+
+} // min-width :980px
+// Portrait and Landscape
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+
+@media(min-width: 1200px) {}
+
+//iPhone 5
+@media (max-width:320px) {}

@@ -1,0 +1,105 @@
+
+
+// =====================================================================================================================================
+// Dev notes -------------------------------------------------------
+// DRY mixin for inline list where you tell it the padding you want for all, 
+// extended mixins to add a pipe or middot with alt color
+// usage 
+// default : @include inline-list(7px);
+// pipe with alt color : usage @include inline-list-pipe(7px, $ltgray);
+// middot with alt color :  @include inline-list-dot(7px, $grey);
+// =====================================================================================================================================
+
+$Placeholder-Selectors: ();
+
+@mixin inline-list($element, $sidepad, $extend: true) {
+    
+    @if ($element == dd){
+       dd {
+        @include inline-list-static($extend);
+           padding: 0 $sidepad;
+           
+       } 
+    } @else{
+        li {
+            @include inline-list-static($extend);
+            padding: 0 $sidepad;
+            
+        }
+    }
+    
+}
+
+@mixin inline-list-pipe($element, $sidepad, $pipeClr, $extend: true) {
+    %pipeSep {
+        @include inline-list-static($extend);
+        padding: 0 $sidepad;
+        border-right: 1px solid $pipeClr;
+        &:last-child {
+            border-right: 0;
+        }
+    }
+    @if ($element==dd) {
+        dd {
+            @extend %pipeSep;
+        }
+    }
+    @else {
+        li {
+            @extend %pipeSep;
+        }
+    }
+}
+
+
+@mixin inline-list-dot($element, $sidepad, $dotClr, $extend: true) {
+    %dotSep {
+        @include inline-list-static($extend);
+        padding: 0 $sidepad;
+        &:after {
+            content: ' \a0 \2022'; //  \2022 is a bolder dot  \b7 is a middot, \a0 is a space 
+        }
+        &:last-child {
+            padding-left: 0px;
+            &:after {
+                content: ' ';
+            }
+        }
+    }
+    @if ($element==dd) {
+        dd {
+            @extend %dotSep;
+        }
+    }
+    @else {
+        li {
+            @extend %dotSep;
+        }
+    }
+}
+
+
+
+@mixin inline-list-static($extend: true) {
+    $inline-list-selector: map-get($Placeholder-Selectors, 'inline-list');
+    @if $extend==true {
+        @if $inline-list-selector==null {
+            $inline-list-selector: unique-id();
+            $Placeholder-Selectors: map-merge($Placeholder-Selectors, ('inline-list': $inline-list-selector)) !global;
+            @at-root %#{$inline-list-selector} {
+                @include inline-list-static(false);
+            }
+        }
+        @extend %#{$inline-list-selector};
+    }
+    @else {
+            display: inline;
+            list-style: none;
+            text-align: center;
+            a {
+                display: inline-block;
+            }
+        
+    }
+}
+// =====================================================================================================================================
