@@ -1,0 +1,66 @@
+//  Fallback fs
+    $letter-spacing:                20; // Photoshop unit
+    $line-height:               1.618;  // Golden ratio
+    @mixin fs($value) {
+        $Values: '';
+        $ValuesLetterSpacing: '';
+        $ValuesLineHeight: '';
+
+        $Values: #{$Values + $value}px;
+        $ValuesLetterSpacing: #{( $letter-spacing * ($value) ) / 1000}px;
+        $ValuesLineHeight: #{( ($value) ) * $line-height}px;
+
+        line-height: $ValuesLineHeight;
+        letter-spacing: $ValuesLetterSpacing;
+        font-size: $Values;
+    }
+
+
+
+// @function calculateRem($size) {
+//     $remSize: $size / 16px;
+//     @return $remSize * 1rem;
+// }
+
+// @mixin font-size($size) {
+//     font-size: $size;
+//     font-size: calculateRem($size);
+// }
+
+
+$font-sizing: (
+  'f12': (font-size: 12px, line-height: 1.333),
+  'f14': (font-size: 14px, line-height: 1.333),
+  'f16': (font-size: 16px, line-height: 1.333),
+  'f18': (font-size: 18px, line-height: 1.4),
+  'f24': (font-size: 24px, line-height: 1.25),
+  'f30': (font-size: 30px, line-height: 1.2),
+  'f36': (font-size: 36px, line-height: 1.2),
+  'f48': (font-size: 48px, line-height: 1.2),
+  'f60': (font-size: 60px, line-height: 1.2),
+  'f72': (font-size: 72px, line-height: 1.1),
+)!default;
+
+
+
+@mixin getFS($f-size) { 
+    font-size: map-get($font-size);
+    line-height: map-get($line-height);
+};
+
+    
+// @if(map-has-key($font-size, mapProp)) { // returns true
+//        font-size: map-get($font-size, mapProp);
+//        line-height: map-get($line-height, mapProp);
+//     } @else {
+//        @warn 'Property does not exist within $font-sizes Map';
+//     }
+
+
+// @function map-deep-get($map, $keys...) { 
+//   @each $key in $keys {
+//     $map: map-get($map, $key); 
+//   }
+
+//   @return $map; 
+// }

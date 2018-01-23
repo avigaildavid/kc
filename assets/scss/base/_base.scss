@@ -1,0 +1,39 @@
+body {
+    font-family : $font-body;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    /* Prevent font scaling in landscape */
+}
+img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Main layout -----*/
+
+main { margin: 0 auto; }
+
+.container {
+    width: 100%;
+    max-width:$maxwidth;;
+    margin: 0 auto;
+}
+
+a {
+    &, &:hover { color : $hdr-text-color;}
+    & { text-decoration: none;}
+    &:hover {text-decoration: underline;}
+}
+
+
+/* Typography ------------ */
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -.5px;
+}
+
+h1, h2 {
+    & a, & a:hover {color:$black; text-decoration: none;}
+}
+h3, h4, h5, b, strong, dt { font-weight: 600; }

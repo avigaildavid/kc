@@ -1,0 +1,242 @@
+
+main {
+    background-color: $white;
+
+    &.container {
+        max-width: $maxwidth;
+        width: 100%;
+        margin: 0 auto;
+        overflow:hidden;
+        display: block;
+
+    }
+    .banner {
+        width:100%;
+        position: relative;
+        margin-bottom: $gutter;
+        .img-lead {
+            background-image: url('../img/Kevin_Chisholm.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width:100%;
+            padding-top: 46.25%;
+            & + h2 {
+                @include vertical-align(absolute);
+                left:45%;
+                width:50%;
+                color:$white;
+                font-size:18px;
+                font-weight:300;
+                line-height:1.2;
+                margin:0 $gutter 0 $halfgutter;
+                @include mq (medium) {
+                    font-size:32px;
+                }
+            }
+        }
+    }
+
+} //main
+
+.gut { padding: 0 $gutter; }
+
+header {
+    position: relative;
+
+
+    h1 {
+        font-size: 26px;
+        font-family: $font-logo;
+        text-transform : uppercase;
+        color: $black;
+        letter-spacing: -.75px;
+        padding: $halfgutter $gutter;
+        @include mq(ipad) { font-size: 32px; }
+
+    } // logo
+}
+
+
+
+
+article {
+    font-family: $font-body;
+    font-size:16px;
+    color:$text-color;
+    p {
+        font-size: 18px;
+        line-height: 1.65em;
+        // color: $threegray;
+        a {
+            text-decoration: underline;
+        }
+        + p {
+            margin-top: $gutter;
+        }
+    }
+
+    a.more{
+        margin:$halfgutter 0 $gutter;
+        position: relative;
+        font-style: italic;
+        padding-right:12px;
+        display:inline-block;
+        &:after {
+            content:"";
+            position: absolute;
+            top:6px; right:0;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 6px solid $hdr-text-color;
+        }
+    }
+
+
+    &.landing {
+        .gut { margin: 0 $gutter;}
+        .contentWell {
+            text-align: center;
+            h3, h4 {
+                margin: $halfgutter $quartergutter;
+                color: $text-color;
+            }
+            border-bottom:1px solid $blueGrey;
+            @include mq(medium) {
+                border:0;
+            }
+        }
+
+        .icons {
+            width:95%;
+            margin: 0 auto;
+            position: relative;
+            @include mdash ($position:after);
+            li { padding:$halfgutter $gutter;}
+            i {
+                display:block;
+                font-size:42px;
+
+            }
+        }
+        //aside
+        .rel{
+            h3 {
+                font-size:34px;
+                font-weight:300;
+                margin: 0 ($gutter * 6) $gutter 0; // only so that headline wraps properly
+            }
+        }
+    }
+
+
+    &:not(.landing){
+
+        h2, h3, .rel h4 { color: $hdr-text-color; }
+        h2, h3 {padding:$halfgutter 0;}
+        h3, .rel h4 {
+            font-size:20px;
+            text-transform: uppercase;
+        }
+
+        h2 { font-size: 28px;}
+        h3 {margin-top:$gutter;}
+        h4 {margin-bottom:$quartergutter;}
+
+        .subSections h3 {
+            margin-top:$halfgutter;
+            border-top:1px solid $blueGrey;
+        }
+        .rel {
+            h4, h5 { margin-bottom:$halfgutter;}
+        }
+        // dl {padding-top:$gutter;}
+        dt{
+            font-size:13px;
+            text-transform: uppercase;
+        }
+        dd{ padding-bottom: $gutter; }
+
+        ul {
+            list-style:disc;
+            padding-left:1.2em;
+            padding-bottom: $halfgutter;
+            li {
+                font-size: 16px;
+                list-style:disc;
+                padding:$quartergutter 0;
+            }
+        }
+
+    }
+
+
+} //article
+.subSections{ margin-top:$gutter; }
+
+
+.ribbon {
+    padding-top:$gutter;
+    padding-bottom: $gutter;
+    background-color:$bk-color;
+    .rel & {
+        @extend %ltbluegrad;
+        blockquote{ margin: 0 $gutter $gutter;}
+    }
+    // .gut & { background-color:$bk-color;}
+    &, a {color:$text-color;}
+    h5 {
+        font-size: 18px;
+        line-height: 1.65em;
+    }
+    cite, .more a{
+        text-align:center;
+        display:block;
+        padding:$gutter 0;
+    }
+    .more {
+        @include mdash ($position:both);
+        position: relative;
+        text-transform: uppercase;
+        margin: $halfgutter $quartergutter;
+
+        a { color:$subHdr-text-color; }
+    }
+}
+
+.contact {
+    padding-top:$gutter;
+    padding-bottom: $gutter;
+    text-align:center;
+    h3 {
+        padding:$gutter 0;
+        font-size: 20px;
+    }
+    dt, dd{
+        padding: $halfgutter $gutter;
+        position: relative;
+    }
+    dt {
+        text-transform: uppercase;
+        font-size: 12px;
+        color:$blueGrey;
+    }
+    dd { font-size: 18px; }
+    dd + dt { @include mdash ($position:before);}
+
+    //         }
+}
+
+footer.copyright{
+        p {
+            border-top:1px solid $blueGrey;
+            text-align:center;
+            font-size: 12px;
+
+            margin:0 $gutter;
+            padding:$halfgutter 0;
+            @include mq(ipad) {padding:$halfgutter 0 $gutter;}
+    }
+
+}

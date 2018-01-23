@@ -1,0 +1,157 @@
+// ==================================================
+// Settings
+// ==================================================
+// Derived from (https://github.com/jonsuh/mq-sass)
+// dev notes at the bottom
+// ==================================================
+
+// Ems
+// ==================================================
+$mq-ems    : false !default;
+$mq-em-base: 16px !default;
+
+// Breakpoints
+// ==================================================
+
+$mq-breakpoints: (
+  iphone   : 320px,
+  iphone6  : 375px,
+  iphone6p : 414px,
+  small    : 480px,
+  medium   : 640px,
+  ipad     : 768px,
+  large    : 1024px,
+  xlarge   : 1200px
+) !default;
+
+// Breakpoints
+// ==================================================
+$mq-media  : "only screen" !default;
+$max-minus : false !default;
+// ==================================================
+// Functions
+// ==================================================
+
+// Strip units
+// ==================================================
+// Derived from Bourbon by thoughtbot (http://bourbon.io)
+
+@function strip-units($val) {
+  @return ($val / ($val * 0 + 1));
+}
+
+// Pixels to Ems
+// ==================================================
+// Derived from Bourbon by thoughtbot (http://bourbon.io)
+
+@function em($pxval, $base: $mq-em-base) {
+  @if not unitless($pxval) {
+      $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+      $base: strip-units($base);
+  }
+  @return ($pxval / $base) * 1em;
+}
+
+// ==================================================
+// mq Mixin
+// ==================================================
+
+@mixin mq($breakpoint, $minmax: min, $max-minus: false) {
+  @if $breakpoint == landscape or $breakpoint == portrait or $breakpoint == retina or map-has-key($mq-breakpoints, $breakpoint) or type-of($breakpoint) == "number" {
+    $media: $mq-media;
+    $media-query: "";
+
+    @if ($media == false) {
+      $media: "";
+    }
+    @else {
+      $media: $media + " and ";
+    }
+
+    @if $breakpoint == landscape or $breakpoint == portrait {
+      $media-query: "#{$media} (orientation: #{$breakpoint})";
+    }
+    @else if $breakpoint == retina {
+      $media-query: "#{$media} (-webkit-min-device-pixel-ratio: 2)," +
+                    "#{$media} (min-resolution: 2dppx)";
+    }
+    @else {
+      @if $minmax != min and $minmax != max {
+        @warn "The second parameter of `mq()` only accepts value of `min` or `max`. "
+            + "Falling back to the default, `min`.";
+        $minmax: min;
+      }
+
+      $value: $breakpoint;
+
+      @if map-has-key($mq-breakpoints, $breakpoint) {
+        $value: map-get($mq-breakpoints, $breakpoint);
+      }
+
+      $value: strip-units($value);
+
+      @if ($max-minus == true) {
+        $value: $value - 1;
+      }
+
+      @if ($mq-ems == true) {
+        $value: em($value, $mq-em-base);
+      }
+      @else {
+        $value: $value + px;
+      }
+
+      $media-query: "#{$media} (#{$minmax}-width: #{$value})";
+    }
+
+    @media #{$media-query} {
+      @content;
+    }
+  }
+  @else {
+    @warn "Invalid breakpoint value. It must be "
+        + "defined in the `$mq-breakpoints` map, a valid CSS value, "
+        + "or a predefined (e.g. retina, landscape, portrait).";
+  }
+}
+
+
+
+// ==================================================
+// Dev Notes
+// ==================================================
+
+// By default, media queries are mobile first (min-width). 
+// To set the query as max width use max keyword after size
+
+// Usage examples
+
+// @include mq(ipad) {  color: white;  }
+
+// @include mq(ipad, max) {
+//   color: blue;
+// }
+
+// @include mq(600px) { color: magenta; }
+
+// @include mq(600px, max) { color: cyan; }
+
+// @include mq(portrait || landscape) { color: white; }
+
+// To declare min and max with use nested includes
+
+// @include mq(ipad) {
+//     @include mq( large, max) {
+//     }
+// }
+
+// To use em instead of px set var to true
+// $mq-ems    : true;
+// $mq-em-base: 20px;
+
+// To use px amount with out using the key map
+// @include mq(600px) { color: cyan; }
+
+// ==================================================

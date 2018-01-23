@@ -1,0 +1,32 @@
+.tout {
+    background:$white;
+    padding:0 0 $gutter;
+    h3,
+    h4 {
+        font-weight: 700;
+        color: $black;
+        background-color: $white;
+    }
+    p {
+        @extend %pCopy;
+        margin: 0;
+        padding:0 $gutter;
+        font-size:14px;
+    }
+    img {
+        @extend %rsimg;
+    }
+    > a {
+        position: relative;
+        display: block;
+        line-height: 0.8em; //Fixes the random pixel padding at bottom of image
+    }
+
+    strong {
+        display: block;
+        padding: $gutter $gutter 0;
+        color: $black;
+        font-size: 22px;
+        line-height:1.3em;
+    }
+}
